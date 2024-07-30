@@ -1,10 +1,10 @@
 import sequelize from "../db/index.js";
 import { DataTypes } from "sequelize";
 
-const productInfo = DataTypes.JSONB;
+const productInfo = DataTypes.JSON;
 const Order = sequelize.define("Order", {
     products: {
-        type:DataTyoes.ARRAY(productInfo),
+        type: DataTypes.ARRAY(productInfo),
         allowNull: false,
         validate: {
             isProductArray(value) {
