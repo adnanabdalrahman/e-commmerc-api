@@ -4,5 +4,5 @@ import Order from "./Order.js";
 User.hasMany(Order);
 Order.belongsTo(User);
 
-await User.sync();
-await Order.sync();
+await User.sync({ alter: true });
+await Order.sync({ alter: true });
