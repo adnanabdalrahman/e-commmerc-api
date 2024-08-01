@@ -1,7 +1,9 @@
-import Product from './Product';
-import OrderProduct from './OrderProduct';
+import Product from './Product.js';
+import OrderProduct from './OrderProduct.js';
 import User from "./User.js";
 import Order from "./Order.js";
+import Category from './Category.js';
+import sequelize from '../db/index.js';
 
 
 User.hasMany(Order);

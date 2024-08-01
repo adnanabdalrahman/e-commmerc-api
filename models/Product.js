@@ -1,6 +1,6 @@
-import sequelize from "../db/index";
+import sequelize from "../db/index.js";
 import { DataTypes } from "sequelize";
-import Category from "./Category";
+import Category from "./Category.js";
 
 const Product = sequelize.define('Product', {
     name: {
@@ -26,8 +26,4 @@ const Product = sequelize.define('Product', {
 }
 );
 
-Product.belongsTo(Category, { foreignKey: 'categoryId' });
-Category.hasMany(Product, { foreignKey: 'categoryId' });
-
-Product.sync();
 export default Product;

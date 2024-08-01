@@ -1,4 +1,4 @@
-import sequelize from '../db/index';
+import sequelize from '../db/index.js';
 import { DataTypes } from 'sequelize';
 
 const OrderProduct = sequelize.define('OrderProduct', {
