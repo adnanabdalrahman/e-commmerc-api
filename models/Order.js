@@ -1,28 +1,20 @@
-import sequelize from "../db/index.js";
-import { DataTypes } from "sequelize";
+import sequelize from '../db/index.js';
+import { DataTypes } from 'sequelize';
+import User from './User.js';
 
-const productInfo = DataTypes.JSON;
-const Order = sequelize.define("Order", {
-    products: {
-        type: DataTypes.ARRAY(productInfo),
-        allowNull: false,
-        validate: {
-            isProductArray(value) {
-                if (!Array.isArray(value)) {
-                    throw new Error('Products must be an array');
-                }
-                value.forEach(product => {
-                    if (typeof product.productId !== 'number' || typeof product.quantity !== 'number') {
-                        throw new Error('Each product must have a productId and quantity as numbers');
-                    }
-                });
-            }
-        }
+const Order = sequelize.define('Order', {
+    userId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: User,
+            key: 'id'
+        },
+        allowNull: false
     },
     total: {
         type: DataTypes.FLOAT,
-        allowNull: false,
-    },
+        allowNull: false
+    }
 });
-sequelize.sync();
+
 export default Order;

@@ -1,10 +1,16 @@
-import joi from 'joi';
+import Joi from 'joi';
 
-const orderSchema = joi.object({
-     products: joi.array().items(joi.object({
-            productId: joi.number().required(),
-            quantity: joi.number().required(),
-        })).required(),
-    total: joi.number().required(),
+const orderSchema = Joi.object({
+    userId: Joi.number().required(),
+    products: Joi.array().items(
+        Joi.object({
+            productId: Joi.number().required(),
+            quantity: Joi.number().required()
+        })
+    ).required()
 });
+
+
 export default orderSchema;
+
+
