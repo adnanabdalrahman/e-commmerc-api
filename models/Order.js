@@ -19,7 +19,7 @@ const Order = sequelize.define("Order", {
             }
         }
     },
-    total:{
+    total: {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
