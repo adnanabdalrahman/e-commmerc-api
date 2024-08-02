@@ -5,4 +5,4 @@ const productSchema = Joi.object({
     price: Joi.number().required(),
     categoryId: Joi.number().required()
 });
-export default userSchema;
+export default productSchema;
