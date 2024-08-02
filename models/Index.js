@@ -1,23 +1,18 @@
+import sequelize from '../db/index.js';
+import User from './User.js';
+import Order from './Order.js';
 import Product from './Product.js';
 import OrderProduct from './OrderProduct.js';
-import User from "./User.js";
-import Order from "./Order.js";
-import Category from './Category.js';
-import sequelize from '../db/index.js';
 
+// Define relationships
+User.hasMany(Order, { foreignKey: 'userId' });
+Order.belongsTo(User, { foreignKey: 'userId' });
 
-User.hasMany(Order);
-Order.belongsTo(User);
+Product.belongsToMany(Order, { through: OrderProduct, foreignKey: 'productId' });
+Order.belongsToMany(Product, { through: OrderProduct, foreignKey: 'orderId' });
 
-// Order-Product relationship
-Order.belongsToMany(Product, { through: OrderProduct });
-Product.belongsToMany(Order, { through: OrderProduct });
-
-Product.belongsTo(Category, { foreignKey: 'categoryId' });
-Category.hasMany(Product, { foreignKey: 'categoryId' });
-
-// Sync the models
+// Sync models
 (async () => {
-    await sequelize.sync({ force: true }); // Use force: true to recreate the tables if they already exist (useful for testing)
+    await sequelize.sync({ force: true }); // Use force: true to recreate tables
     console.log("Database synced!");
 })();
