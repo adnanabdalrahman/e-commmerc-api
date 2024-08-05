@@ -1,6 +1,7 @@
 import sequelize from '../db/index.js';
 import { DataTypes } from 'sequelize';
-
+import Order from './Order.js';
+import Product from './Product.js';
 const OrderProduct = sequelize.define('OrderProduct', {
     quantity: {
         type: DataTypes.INTEGER,
@@ -11,7 +12,7 @@ const OrderProduct = sequelize.define('OrderProduct', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Orders',
+            model: Order,
             key: 'id'
         }
     },
@@ -19,7 +20,7 @@ const OrderProduct = sequelize.define('OrderProduct', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Products',
+            model: Product,
             key: 'id'
         }
     }

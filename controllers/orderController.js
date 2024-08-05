@@ -3,7 +3,8 @@ import Product from '../models/Product.js';
 import OrderProduct from '../models/OrderProduct.js';
 import User from '../models/User.js';
 
-// Helper function to calculate the total cost of the order
+
+
 const calculateTotal = async (products) => {
     let total = 0;
     for (const item of products) {
@@ -21,16 +22,12 @@ export const createOrder = async (req, res) => {
     try {
         const { userId, products } = req.body;
 
-        // Validate user
         const user = await User.findByPk(userId);
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
-
-        // Calculate total cost
         const total = await calculateTotal(products);
 
-        // Create Order record
         const order = await Order.create({
             userId,
             total
@@ -45,7 +42,7 @@ export const createOrder = async (req, res) => {
 
             await OrderProduct.create({
                 orderId: order.id,
-                productId: item.productId, // Ensure this is correctly set
+                productId: item.productId,
                 quantity: item.quantity
             });
         }
@@ -90,10 +87,10 @@ export const getOrderById = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
     try {
-        const products = req.body.products; // Array of { productId, quantity }
+        const products = req.body.products;
         const total = await calculateTotal(products);
 
-        const [updated] = await Order.update({
+        const updated = await Order.update({
             userId: req.body.userId,
             total: total
         }, {
